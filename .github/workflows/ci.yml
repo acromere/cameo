@@ -19,12 +19,12 @@ jobs:
           java-version: 21
       - name: Build
         env:
-          AVN_GPG_PASSWORD: ${{ secrets.AVN_GPG_PASSWORD }}
-          AVN_KEYSTORE_PASSWORD: ${{ secrets.AVN_KEYSTORE_PASSWORD }}
-          AVN_REPO_USERNAME: ${{ secrets.AVN_REPO_USERNAME }}
-          AVN_REPO_PASSWORD: ${{ secrets.AVN_REPO_PASSWORD }}
+          ACM_GPG_PASSWORD: ${{ secrets.ACM_GPG_PASSWORD }}
+          ACM_KEYSTORE_PASSWORD: ${{ secrets.ACM_KEYSTORE_PASSWORD }}
+          ACM_REPO_USERNAME: ${{ secrets.ACM_REPO_USERNAME }}
+          ACM_REPO_PASSWORD: ${{ secrets.ACM_REPO_PASSWORD }}
         run: |
           Xvfb :99 &
           export DISPLAY=:99
-          gpg --quiet --batch --yes --decrypt --passphrase=$AVN_GPG_PASSWORD --output .github/avereon.keystore .github/avereon.keystore.gpg
+          gpg --quiet --batch --yes --decrypt --passphrase=$ACM_GPG_PASSWORD --output .github/acromere.keystore .github/acromere.keystore.gpg
           mvn deploy -B -U -V --settings .github/settings.xml --file pom.xml

@@ -1,5 +1,5 @@
 module cameo {
-	requires static com.avereon.zenna;
+	requires static com.acromere.zenna;
 	requires static maven.plugin.api;
 	requires static maven.plugin.annotations;
 	requires static maven.project;
@@ -7,7 +7,7 @@ module cameo {
 	requires transitive javafx.controls;
 	requires transitive javafx.graphics;
 
-	requires com.avereon.zerra;
+	requires com.acromere.zerra;
 
-	exports com.avereon.cameo;
+	exports com.acromere.cameo;
 }

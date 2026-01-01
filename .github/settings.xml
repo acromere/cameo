@@ -6,38 +6,38 @@
 
 	<servers>
 		<server>
-			<id>avn-release</id>
-			<username>${env.AVN_REPO_USERNAME}</username>
-			<password>${env.AVN_REPO_PASSWORD}</password>
+			<id>acm-release</id>
+			<username>${env.ACM_REPO_USERNAME}</username>
+			<password>${env.ACM_REPO_PASSWORD}</password>
 		</server>
 		<server>
-			<id>avn-snapshot</id>
-			<username>${env.AVN_REPO_USERNAME}</username>
-			<password>${env.AVN_REPO_PASSWORD}</password>
+			<id>acm-snapshot</id>
+			<username>${env.ACM_REPO_USERNAME}</username>
+			<password>${env.ACM_REPO_PASSWORD}</password>
 		</server>
 		<server>
-			<id>avn-mirror</id>
-			<username>${env.AVN_REPO_USERNAME}</username>
-			<password>${env.AVN_REPO_PASSWORD}</password>
+			<id>acm-mirror</id>
+			<username>${env.ACM_REPO_USERNAME}</username>
+			<password>${env.ACM_REPO_PASSWORD}</password>
 		</server>
 <!--		<server>-->
 <!--			<id>central-mirror</id>-->
-<!--			<username>${env.AVN_REPO_USERNAME}</username>-->
-<!--			<password>${env.AVN_REPO_PASSWORD}</password>-->
+<!--			<username>${env.ACM_REPO_USERNAME}</username>-->
+<!--			<password>${env.ACM_REPO_PASSWORD}</password>-->
 <!--		</server>-->
 	</servers>
 
 	<mirrors>
 		<mirror>
-			<id>avn-mirror</id>
-			<name>Mirror to Avereon Maven Repository</name>
-			<url>https://repo.avereon.com/avn</url>
-			<mirrorOf>avn</mirrorOf>
+			<id>acm-mirror</id>
+			<name>Mirror to Acromere Maven Repository</name>
+			<url>https://repo.acromere.com/acm</url>
+			<mirrorOf>acm</mirrorOf>
 		</mirror>
 		<mirror>
 			<id>central-mirror</id>
-			<name>Mirror to Avereon Maven Repository</name>
-			<url>https://repo.avereon.com/central</url>
+			<name>Mirror to Acromere Maven Repository</name>
+			<url>https://repo.acromere.com/central</url>
 			<mirrorOf>central</mirrorOf>
 		</mirror>
 	</mirrors>
@@ -50,8 +50,8 @@
 		<profile>
 			<id>signjar</id>
 			<properties>
-				<jarsigner.keystore>.github/avereon.keystore</jarsigner.keystore>
-				<jarsigner.keystore.password>${env.AVN_KEYSTORE_PASSWORD}</jarsigner.keystore.password>
+				<jarsigner.keystore>.github/acromere.keystore</jarsigner.keystore>
+				<jarsigner.keystore.password>${env.ACM_KEYSTORE_PASSWORD}</jarsigner.keystore.password>
 			</properties>
 		</profile>
 	</profiles>

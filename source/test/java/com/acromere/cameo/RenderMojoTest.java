@@ -1,4 +1,4 @@
-package com.avereon.cameo;
+package com.acromere.cameo;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.plugin.MojoExecutionException;

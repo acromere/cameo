@@ -1,4 +1,4 @@
-package com.avereon.cameo;
+package com.acromere.cameo;
 
 public class ImageMetadata {
 

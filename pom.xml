@@ -5,19 +5,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.avereon.pom</groupId>
+		<groupId>com.acromere.pom</groupId>
 		<artifactId>jar</artifactId>
-		<version>3.7-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
 
-	<groupId>com.avereon</groupId>
+	<groupId>com.acromere</groupId>
 	<artifactId>cameo</artifactId>
 	<version>2.13-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>Cameo</name>
-	<description>A Maven plugin to save Avereon ProgramImage objects as image files.</description>
+	<description>A Maven plugin to save Acromere ProgramImage objects as image files.</description>
 	<inceptionYear>2019</inceptionYear>
 
 	<developers>
@@ -32,15 +32,15 @@
 
 	<repositories>
 		<repository>
-			<id>avn</id>
-			<url>https://repo.avereon.com/avn</url>
+			<id>acm</id>
+			<url>https://repo.acromere.com/acm</url>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
-			<id>avn-plugin</id>
-			<url>https://repo.avereon.com/avn</url>
+			<id>acm-plugin</id>
+			<url>https://repo.acromere.com/acm</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -64,7 +64,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.avereon</groupId>
+			<groupId>com.acromere</groupId>
 			<artifactId>zenna</artifactId>
 			<version>${zenna.version}</version>
 		</dependency>

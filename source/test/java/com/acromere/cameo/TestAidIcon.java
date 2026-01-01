@@ -1,6 +1,6 @@
-package com.avereon.cameo;
+package com.acromere.cameo;
 
-import com.avereon.zerra.image.SvgIcon;
+import com.acromere.zerra.image.SvgIcon;
 
 public class TestAidIcon extends SvgIcon {
 
