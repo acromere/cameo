@@ -6,25 +6,46 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  ACM_GPG_PASSWORD: ${{ secrets.ACM_GPG_PASSWORD }}
+  ACM_KEYSTORE_PASSWORD: ${{ secrets.ACM_KEYSTORE_PASSWORD }}
+  ACM_MAVEN_REPO_USERNAME: ${{ secrets.ACM_MAVEN_REPO_USERNAME }}
+  ACM_MAVEN_REPO_PASSWORD: ${{ secrets.ACM_MAVEN_REPO_PASSWORD }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch sources
-        uses: actions/checkout@v6
       - name: Set up Java
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: 21
+
+      - name: Fetch sources
+        uses: actions/checkout@v6
+
+      - name: Fetch CI/CD resources
+        uses: actions/checkout@v6
+        with:
+          repository: acromere/canoe
+          path: .github
+
+      - name: Setup
+        shell: bash
+        run: |
+          source .github/config.sh
+
+      - name: Maven Repository Cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Build
-        env:
-          ACM_GPG_PASSWORD: ${{ secrets.ACM_GPG_PASSWORD }}
-          ACM_KEYSTORE_PASSWORD: ${{ secrets.ACM_KEYSTORE_PASSWORD }}
-          ACM_REPO_USERNAME: ${{ secrets.ACM_REPO_USERNAME }}
-          ACM_REPO_PASSWORD: ${{ secrets.ACM_REPO_PASSWORD }}
         run: |
           Xvfb :99 &
           export DISPLAY=:99
-          gpg --quiet --batch --yes --decrypt --passphrase=$ACM_GPG_PASSWORD --output .github/acromere.keystore .github/acromere.keystore.gpg
           mvn deploy -B -U -V --settings .github/settings.xml --file pom.xml
