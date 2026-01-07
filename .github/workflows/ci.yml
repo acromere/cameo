@@ -12,16 +12,15 @@ env:
   ACM_MAVEN_REPO_USERNAME: ${{ secrets.ACM_MAVEN_REPO_USERNAME }}
   ACM_MAVEN_REPO_PASSWORD: ${{ secrets.ACM_MAVEN_REPO_PASSWORD }}
 
+  DISPLAY: ":99"
+  JAVA_VERSION: "21"
+  MAVEN_PARMS: "-B -U -V --settings .github/settings.xml --file pom.xml"
+  XVFB_PARMS: "-screen 0 1920x1080x24 -nolisten unix"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Java
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: 21
-
       - name: Fetch sources
         uses: actions/checkout@v6
 
@@ -31,10 +30,21 @@ jobs:
           repository: acromere/canoe
           path: .github
 
-      - name: Setup
+      - name: Configuration
         shell: bash
         run: |
           source .github/config.sh
+
+      # Required to render the product icon
+      - name: Set up Virtual Display
+        run: |
+          Xvfb ${{env.DISPLAY}} ${{env.XVFB_PARMS}} &
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{env.JAVA_VERSION}}
 
       - name: Maven Repository Cache
         uses: actions/cache@v5
@@ -46,6 +56,8 @@ jobs:
 
       - name: Build
         run: |
-          Xvfb :99 &
-          export DISPLAY=:99
-          mvn deploy -B -U -V --settings .github/settings.xml --file pom.xml
+          mvn ${{env.MAVEN_PARMS}} package
+
+      - name: Deploy
+        run: |
+          mvn ${{env.MAVEN_PARMS}} -Dmaven.test.skip deploy
