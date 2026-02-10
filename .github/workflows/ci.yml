@@ -1,4 +1,4 @@
-name: Acromere Cameo CI
+name: Cameo CI
 
 on:
   push:
