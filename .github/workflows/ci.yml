@@ -13,7 +13,7 @@ env:
   ACM_MAVEN_REPO_PASSWORD: ${{ secrets.ACM_MAVEN_REPO_PASSWORD }}
 
   DISPLAY: ":99"
-  JAVA_VERSION: "21"
+  JAVA_VERSION: "25"
   MAVEN_PARMS: "-B -U -V --settings .github/settings.xml --file pom.xml"
   XVFB_PARMS: "-screen 0 1920x1080x24 -nolisten unix"
 
