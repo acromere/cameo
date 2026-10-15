@@ -31,7 +31,7 @@
 		<mirror>
 			<id>acm-mirror</id>
 			<name>Mirror to Acromere Maven Repository</name>
-			<url>https://repo.acromere.com/acm</url>
+			<url>https://repo.acromere.com/acm/</url>
 			<mirrorOf>acm</mirrorOf>
 		</mirror>
 		<mirror>
