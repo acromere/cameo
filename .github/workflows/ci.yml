@@ -8,10 +8,17 @@ on:
 
 env:
   ACM_PRODUCT: cameo
+  # The default release, should be overridden in config.sh
+  ACM_RELEASE: "latest"
+  # The default platform, should be overridden in the platform binaries jobs below
+  ACM_PLATFORM: "linux"
+
   ACM_GPG_PASSWORD: ${{ secrets.ACM_GPG_PASSWORD }}
   ACM_KEYSTORE_PASSWORD: ${{ secrets.ACM_KEYSTORE_PASSWORD }}
   ACM_MAVEN_REPO_USERNAME: ${{ secrets.ACM_MAVEN_REPO_USERNAME }}
   ACM_MAVEN_REPO_PASSWORD: ${{ secrets.ACM_MAVEN_REPO_PASSWORD }}
+  ACM_XENON_REPO_USERNAME: ${{ secrets.ACM_XENON_REPO_USERNAME }}
+  ACM_XENON_REPO_PASSWORD: ${{ secrets.ACM_XENON_REPO_PASSWORD }}
 
   DISPLAY: ":99"
   JAVA_VERSION: "25"
