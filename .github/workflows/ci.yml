@@ -8,9 +8,9 @@ on:
 
 env:
   ACM_PRODUCT: cameo
-  # The default release, should be overridden in config.sh
+  # The default release, it should be overridden in config.sh
   ACM_RELEASE: "latest"
-  # The default platform, should be overridden in the platform binaries jobs below
+  # The default platform, it should be overridden in the platform binaries jobs below
   ACM_PLATFORM: "linux"
 
   ACM_GPG_PASSWORD: ${{ secrets.ACM_GPG_PASSWORD }}
