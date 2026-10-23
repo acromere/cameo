@@ -33,14 +33,14 @@
 	<repositories>
 		<repository>
 			<id>acm</id>
-			<url>https://repo.acromere.com/acm</url>
+			<url>https://repo.acromere.com/acm/</url>
 		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
 			<id>acm-plugin</id>
-			<url>https://repo.acromere.com/acm</url>
+			<url>https://repo.acromere.com/acm/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
@@ -55,7 +55,7 @@
 		<zenna.version>0.12-SNAPSHOT</zenna.version>
 		<image4j.version>0.7.2</image4j.version>
 		<maven.project.version>2.2.1</maven.project.version>
-		<maven.plugin.api.version>3.9.16</maven.plugin.api.version>
+		<maven.plugin.api.version>3.10.0</maven.plugin.api.version>
 		<maven.plugin.annotations.version>3.16.0</maven.plugin.annotations.version>
 		<openjfx.version>21.0.6</openjfx.version>
 		<slf4j.version>2.0.17</slf4j.version>
@@ -159,6 +159,36 @@
 						<goals>
 							<goal>helpmojo</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<additionalOptions>-Xdoclint:none</additionalOptions>
+							<failOnError>false</failOnError>
+							<quiet>true</quiet>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
