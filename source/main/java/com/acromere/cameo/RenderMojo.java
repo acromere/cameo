@@ -11,10 +11,12 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Path;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings( "unused" )
-@Mojo( name = "render", defaultPhase = LifecyclePhase.PREPARE_PACKAGE )
+@Mojo( name = "render", defaultPhase = LifecyclePhase.PREPARE_PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE )
 public class RenderMojo extends AbstractMojo {
 
 	@Parameter( readonly = true, defaultValue = "${project}" )
@@ -39,11 +41,26 @@ public class RenderMojo extends AbstractMojo {
 	private ClassLoader loader;
 
 	@Override
+	@SuppressWarnings( "unchecked" )
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		if( images == null && icons == null ) throw new MojoExecutionException( "No images or icons to render" );
 
 		try {
-			urls = List.of( new File( project.getBuild().getOutputDirectory() ).toURI().toURL() );
+			urls = new ArrayList<>();
+
+			// Project build path
+			urls.add( new File( project.getBuild().getOutputDirectory() ).toURI().toURL() );
+
+			// Project classpath
+			List<String> elements = project.getCompileClasspathElements();
+			urls.addAll( elements.stream().map(s -> {
+				try {
+					return new File(s).toURI().toURL();
+				} catch( MalformedURLException e ) {
+					throw new RuntimeException( e );
+				}
+			} ).toList());
+
 			//urls.forEach( u -> getLog().info( "url=" + u ) );
 
 			// Create special class loader that includes the recently created classes
