@@ -116,7 +116,12 @@ public class RenderMojo extends AbstractMojo {
 			return renderer;
 		} catch( ClassNotFoundException exception ) {
 			getLog().error( "Renderer class not found: " + imageMetadata.getImageClass(), exception );
-			urls.forEach( u -> getLog().error( "  url=" + u ) );
+			if( urls.isEmpty() ) {
+				getLog().error( "  Renderer class root: " + project.getBuild().getOutputDirectory() );
+				getLog().error( "  No URLs to load renderer classes!" );
+			} else {
+				urls.forEach( u -> getLog().error( "  url=" + u ) );
+			}
 			throw exception;
 		}
 	}
