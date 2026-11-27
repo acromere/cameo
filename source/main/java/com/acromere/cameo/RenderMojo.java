@@ -33,14 +33,16 @@ public class RenderMojo extends AbstractMojo {
 	@Parameter( property = "icons" )
 	private IconMetadata[] icons;
 
-	ClassLoader loader;
+	private List<URL> urls;
+
+	private ClassLoader loader;
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		if( images == null && icons == null ) throw new MojoExecutionException( "No images or icons to render" );
 
 		try {
-			List<URL> urls = List.of( new File( project.getBuild().getOutputDirectory() ).toURI().toURL() );
+			urls = List.of( new File( project.getBuild().getOutputDirectory() ).toURI().toURL() );
 			//urls.forEach( u -> getLog().info( "url=" + u ) );
 
 			// Create special class loader that includes the recently created classes
@@ -113,7 +115,8 @@ public class RenderMojo extends AbstractMojo {
 
 			return renderer;
 		} catch( ClassNotFoundException exception ) {
-			getLog().error( "Unable to load renderer: " + imageMetadata.getImageClass(), exception );
+			getLog().error( "Renderer class not found: " + imageMetadata.getImageClass(), exception );
+			urls.forEach( u -> getLog().error( "  url=" + u ) );
 			throw exception;
 		}
 	}
