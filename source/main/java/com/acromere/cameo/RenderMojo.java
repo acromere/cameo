@@ -1,5 +1,6 @@
 package com.acromere.cameo;
 
+import com.acromere.util.JavaUtil;
 import com.acromere.zerra.image.VectorImage;
 import com.acromere.zerra.image.VectorImageWriter;
 import com.acromere.zerra.theme.Theme;
@@ -120,7 +121,8 @@ public class RenderMojo extends AbstractMojo {
 				getLog().error( "  Renderer class root: " + project.getBuild().getOutputDirectory() );
 				getLog().error( "  No URLs to load renderer classes!" );
 			} else {
-				urls.forEach( u -> getLog().error( "  url=" + u ) );
+				urls.forEach( u -> getLog().error( "  folder url=" + u ) );
+				JavaUtil.getModulePath().forEach( u -> getLog().error( "  module url=" + u ) );
 			}
 			throw exception;
 		}
